@@ -27,7 +27,7 @@
 
         <activity
             android:name=".GeoTin"
-            android:label="@string/title_activity_geo_tin" >
+            android:label="GeoTin" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

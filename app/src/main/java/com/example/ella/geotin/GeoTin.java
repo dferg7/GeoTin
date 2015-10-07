@@ -55,6 +55,23 @@ public class GeoTin extends FragmentActivity {
         }
     }
 
+    public void onZoom(View view) {
+        if(view.getId() == R.id.Bzoomin){
+            mMap.animateCamera(CameraUpdateFactory.zoomIn());
+        }
+        if(view.getId() == R.id.Bzoomout){
+            mMap.animateCamera(CameraUpdateFactory.zoomOut());
+        }
+    }
+
+    public void changeType(View view) {
+        if(mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
+            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        }
+        else
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+    }
+
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {

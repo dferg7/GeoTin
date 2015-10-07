@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
 
-<LinearLayout
+    <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <EditText
-        android:layout_width="287dp"
+        android:layout_width="241dp"
         android:layout_height="wrap_content"
         android:id="@+id/TFaddress"
         android:inputType="none" />
@@ -23,11 +23,47 @@
         android:layout_gravity="right"
         android:onClick="onSearch" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Map Type"
+        android:id="@+id/Btype"
+        android:layout_gravity="right"
+        android:onClick="changeType" />
+
 </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="384dp"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="342dp"
     android:layout_height="470dp" android:id="@+id/map" tools:context=".GeoTin"
     android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <Button
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:text="^"
+        android:id="@+id/Bzoomin"
+        android:onClick="onZoom" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="v"
+        android:id="@+id/Bzoomout"
+        android:layout_gravity="center_vertical"
+        android:onClick="onZoom" />
+
+    </LinearLayout>
+</LinearLayout>
 
 </LinearLayout>
