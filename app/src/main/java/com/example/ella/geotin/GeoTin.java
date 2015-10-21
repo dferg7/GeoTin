@@ -18,7 +18,7 @@ import java.util.List;
 
 public class GeoTin extends FragmentActivity {
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private GoogleMap map; // Might be null if Google Play services APK is not available.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,37 +49,39 @@ public class GeoTin extends FragmentActivity {
 
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            map.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+            map.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
         }
     }
 
     public void onZoom(View view) {
         if(view.getId() == R.id.Bzoomin){
-            mMap.animateCamera(CameraUpdateFactory.zoomIn());
+            map.animateCamera(CameraUpdateFactory.zoomIn());
         }
         if(view.getId() == R.id.Bzoomout){
-            mMap.animateCamera(CameraUpdateFactory.zoomOut());
+            map.animateCamera(CameraUpdateFactory.zoomOut());
         }
     }
 
+    // set up map type
     public void changeType(View view) {
-        if(mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+/*        if(mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
             mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         }
         else
-            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);*/
     }
 
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
+        if (map == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+            map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
-            if (mMap != null) {
+            if (map != null) {
                 setUpMap();
             }
         }
@@ -87,7 +89,10 @@ public class GeoTin extends FragmentActivity {
 
 
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-        mMap.setMyLocationEnabled(true);
+        map.setMyLocationEnabled(true);
+
+        //map.addMarker(new MarkerOptions().position().title("I am here"));
+        //map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
     }
 }
