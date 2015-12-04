@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -34,6 +35,9 @@ public class GeoTin extends FragmentActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_geo_tin);
         setUpMapIfNeeded();
+        onPopulate(21.200000,-157.810000, "test");
+        onPopulate(21.300000,-157.710000, "testDos");
+
     }
 
     @Override
@@ -72,6 +76,7 @@ public class GeoTin extends FragmentActivity {
         if(latitude > 21.291918 && latitude < 21.310791 && longitude > -157.821747 && longitude < -157.808540)  {
             // Add marker to current location
             Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(location));
+            Log.d("Test", String.valueOf(new LatLng(latitude, longitude)));
 
         }
         else
@@ -80,97 +85,11 @@ public class GeoTin extends FragmentActivity {
 
     }
 
+    public void onPopulate(double latitude, double longitude, String location) {
+        Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(location));
+    }
 
 
-/*    public void onPost(View view) throws IOException {
-        EditText location_tf = (EditText)findViewById(R.id.TFaddress);
-        String location = location_tf.getText().toString();
-        List<Address> addressList = null;
-
-        if (location != null || !location.equals(" ")) {
-            Geocoder geocoder = new Geocoder(this);
-            try {
-                addressList = geocoder.getFromLocationName(location, 1);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Address address = addressList.get(0);
-            LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title(location));
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-
-        }
-    }*/
-
-
-/*    //protected void onWindowFocusChanged (View view) {
-
-
-        // Scales the contents of the given view so that it completely fills the
-        // given container on one axis (that is, we're scaling isotropically)
-        private void scaleContents (View rootView, View container){
-            // compute the scaling ratio
-            float xScale = (float) container.getWidth() / rootView.getWidth();
-            float yScale = (float) container.getHeight() / rootView.getHeight();
-            float scale = Math.min(xScale, yScale);
-
-            // Scale our contents
-            scaleViewandChildren(rootView, scale);
-        }
-
-        // Scale the given view, its contents, and all of its children by the
-        // given factor
-
-    public static void scaleViewandChildren(View root, float scale) {
-        // Retrieve the view's layout information
-        ViewGroup.LayoutParams layoutParams = root.getLayoutParams();
-
-        // Scale the view itself
-        if (layoutParams.width != ViewGroup.LayoutParams.MATCH_PARENT && layoutParams.width != ViewGroup.LayoutParams.WRAP_CONTENT) {
-            layoutParams.width *= scale;
-        }
-        if (layoutParams.height != ViewGroup.LayoutParams.MATCH_PARENT && layoutParams.height != ViewGroup.LayoutParams.WRAP_CONTENT) {
-            layoutParams.height *= scale;
-        }
-
-        // If this view has margins, scale those too
-        if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams marginParams =
-                    (ViewGroup.MarginLayoutParams) layoutParams;
-            marginParams.leftMargin *= scale;
-            marginParams.rightMargin *= scale;
-            marginParams.topMargin *= scale;
-            marginParams.bottomMargin *= scale;
-        }
-
-        // Set the layout information back into the view
-        root.setLayoutParams(layoutParams);
-
-        // Scale the view's padding
-        root.setPadding(
-                (int) (root.getPaddingLeft() * scale),
-                (int) (root.getPaddingTop() * scale),
-                (int) (root.getPaddingRight() * scale),
-                (int) (root.getPaddingBottom() * scale));
-
-        // If the root view is a TextView, scale the size of its text
-        if (root instanceof TextView) {
-            TextView textView = (TextView) root;
-            textView.setTextSize(textView.getTextSize() * scale);
-        }
-
-        // If the root view is a ViewGroup, scale all of its children recursively
-        if (root instanceof ViewGroup) {
-            ViewGroup groupView = (ViewGroup) root;
-            for (int cnt = 0; cnt < groupView.getChildCount(); ++cnt)
-                scaleViewandChildren(groupView.getChildAt(cnt), scale);
-        }
-
-    }*/
-
-    
 
     public void onZoom(View view) {
         if(view.getId() == R.id.Bzoomin){
@@ -203,8 +122,6 @@ public class GeoTin extends FragmentActivity {
     private void setUpMap() {
         // Enable myLocation layer of google map
         mMap.setMyLocationEnabled(true);
-
-        
 
         //mMap.addMarker(new MarkerOptions().position().title("I am here"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
